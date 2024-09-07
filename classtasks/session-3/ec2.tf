@@ -9,7 +9,7 @@ resource "aws_instance" "web-2" {
               yum install -y httpd
               systemctl start httpd
               systemctl enable httpd
-              echo "<html><body><h1>Session-4 homework is complete! </h1></body></html>" > /var/www/html/index.html
+              echo "<html><body><h1>Session-4 homework is ${env}! </h1></body></html>" > /var/www/html/index.html
               EOF
   tags = {
     Name    = "my-terraform-webserver-${var.env}" // string interpolation 

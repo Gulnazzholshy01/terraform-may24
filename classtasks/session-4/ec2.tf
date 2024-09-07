@@ -71,14 +71,25 @@ resource "aws_security_group" "main" {
   }
 }
 
+# resource "aws_vpc_security_group_ingress_rule" "http" {
+#   count = length(var.ports)
+#   security_group_id = aws_security_group.main.id
+#   cidr_ipv4         = "0.0.0.0/0"
+#   from_port         = var.ports[count.index]
+#   ip_protocol       = "tcp"
+#   to_port           = var.ports[count.index]
+# }
+
+
 resource "aws_vpc_security_group_ingress_rule" "http" {
   count = length(var.ports)
   security_group_id = aws_security_group.main.id
   cidr_ipv4         = "0.0.0.0/0"
-  from_port         = var.ports[count.index]
+  from_port         = element(var.ports, count.index) 
   ip_protocol       = "tcp"
-  to_port           = var.ports[count.index]
+  to_port           = element(var.ports, count.index) 
 }
+
 
 /*
 1 Iteration: count = 1, count.index = 0, port = 80
