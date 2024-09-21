@@ -66,3 +66,7 @@ variable "test" {
 variable "template_sg" {
   default = ["80", "443"]
 }
+
+variable "domain" {
+  default = "cloudishedu.com"
+}
